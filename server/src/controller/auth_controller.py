@@ -31,3 +31,9 @@ async def register(user: CreateUser):
             )
     else:
         raise HTTPException(status_code=400, detail="Invalid format")
+    
+@auth_router.post("/logout")
+async def logout(response: Response):
+    response.delete_cookie("access_token")
+    response.delete_cookie("refresh_token")
+    return {"messsage": "you are logged out."}
